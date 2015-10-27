@@ -1,0 +1,4 @@
+#!/bin/bash -eu
+
+docker build -t centos:spitting .
+docker run -it --name=shipping centos:spitting
