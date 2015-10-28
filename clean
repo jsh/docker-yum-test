@@ -1,13 +1,13 @@
 #!/bin/bash -eu
 
-conts="$(docker ps -aq | uniq)"
+conts="$(docker ps -aq | grep spitting | uniq)"
 [ "$conts" ] || exit 0
 set $conts
 
 docker stop "$@"
 docker rm "$@"
 
-images="$(docker images -q | uniq)"
+images="$(docker images -q | grep jhaemer | uniq)"
 [ "$images" ] || exit 0
 set $images
 
