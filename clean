@@ -1,16 +1,14 @@
 #!/bin/bash -eu
 
-conts="$(docker ps -aq | grep spitting | uniq)"
+conts="$(docker ps -a | awk '/shipping/{print $1}' | uniq)"
 if [ "$conts" ]; then
   set $conts
   docker stop "$@"
   docker rm "$@"
 fi
 
-images="$(docker images -q | grep jhaemer | uniq)"
+images="$(docker images | awk '/jhaemer/{print $3}' | uniq)"
 [ "$images" ] || exit 0
 set $images
 
 docker rmi "$@"
-
-
